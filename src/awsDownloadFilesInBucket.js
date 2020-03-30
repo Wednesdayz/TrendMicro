@@ -5,3 +5,8 @@ import path from "path";
 import Promise from "bluebird";
 import { makeDirectory } from "./FileOperations";
 
+export async function ReplicateS3Bucket(s3){
+	try{
+		
+	}
+}
