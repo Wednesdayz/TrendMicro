@@ -3,7 +3,7 @@ import {AWSError} from './error';
 import {ConfigurationOptions, ConfigBase} from './config';
 import {Endpoint} from './endpoint';
 
-export interface WaiterConfiguration {
+interface WaiterConfiguration {
     /**
      * The number of seconds to wait between requests
      */
@@ -46,7 +46,7 @@ export class Service {
     /**
      * Override this method to setup any custom request listeners for each new request to the service.
      */
-    setupRequestListeners(request: Request<any, AWSError>): void;
+    setupRequestListeners(): void;
     /**
      * Waits for a given state.
      */

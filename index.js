@@ -7,7 +7,6 @@ require('dotenv').config();
 const outputDirectory = path.join(__dirname, process.env.OUTPUT_DIRECTORY);
 const s3 = new AWS.S3();
 const bucket = process.env.S3_BUCKET;
-
 /**
  * Create directory tree from an array of S3 bucket contents and return that array.
  * @param {String} directory File output directory

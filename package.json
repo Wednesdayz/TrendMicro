@@ -1,0 +1,22 @@
+{
+  "name": "s3-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.138.0",
+    "dotenv": "^4.0.0",
+    "mkdirp": "^0.5.1",
+    "mock-aws-s3": "^4.0.1",
+    "s3": "^4.4.0"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^5.1.0",
+    "jest": "^25.2.4"
+  }
+}

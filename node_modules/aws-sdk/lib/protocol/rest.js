@@ -1,5 +1,4 @@
 var util = require('../util');
-var populateHostPrefix = require('./helpers').populateHostPrefix;
 
 function populateMethod(req) {
   req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
@@ -24,7 +23,7 @@ function generateURI(endpointPath, operationPath, input, params) {
 
       if (member.type === 'list') {
         queryString[member.name] = paramValue.map(function(val) {
-          return util.uriEscape(member.member.toWireFormat(val).toString());
+          return util.uriEscape(String(val));
         });
       } else if (member.type === 'map') {
         util.each(paramValue, function(key, value) {
@@ -37,7 +36,7 @@ function generateURI(endpointPath, operationPath, input, params) {
           }
         });
       } else {
-        queryString[member.name] = util.uriEscape(member.toWireFormat(paramValue).toString());
+        queryString[member.name] = util.uriEscape(String(paramValue));
       }
     }
   });
@@ -91,7 +90,6 @@ function buildRequest(req) {
   populateMethod(req);
   populateURI(req);
   populateHeaders(req);
-  populateHostPrefix(req);
 }
 
 function extractError() {
@@ -137,9 +135,6 @@ function extractData(resp) {
   resp.data = data;
 }
 
-/**
- * @api private
- */
 module.exports = {
   buildRequest: buildRequest,
   extractError: extractError,
