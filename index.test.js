@@ -1,6 +1,6 @@
-import { } from index;
+import {getS3ObjectList} from './index';
 
-
+const express = require("express");
 
 test('should connect to server and see a bucket', () => {
     var AWSMock = require('mock-aws-s3');
@@ -15,6 +15,6 @@ test('should connect to server and see a bucket', () => {
             console.error(err);
         }
     });
- 
     getS3ObjectList('example');
+    
 });
