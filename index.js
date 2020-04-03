@@ -13,7 +13,7 @@ const bucket = process.env.S3_BUCKET;
  * @param {Object} contents S3 bucket contents array.
  * @return {Array} S3 bucket contents
  */
-export function makeDirectoryTree(directory, contents) {
+function makeDirectoryTree(directory, contents) {
   contents.forEach((content) => {
     makeDirectory(path.join(directory, content.Key));
   });
@@ -24,7 +24,7 @@ export function makeDirectoryTree(directory, contents) {
  * Make file directory path if it doesn't exist.
  * @param {String} filepath 
  */
-export function makeDirectory(filepath) {
+function makeDirectory(filepath) {
   const dirPath = path.dirname(filepath);
   if (!fs.existsSync(dirPath)) {
     mkdirp(dirPath);
@@ -36,7 +36,7 @@ export function makeDirectory(filepath) {
  * @param Bucket {String} S3 bucket to get contents from.
  * @return {Promise<Object>} An object containing S3 bucket contents.
  */
-export function getS3ObjectList(Bucket) {
+function getS3ObjectList(Bucket) {
   const params = { Bucket };
   return s3.listObjectsV2(params)
     .promise()
@@ -48,7 +48,7 @@ export function getS3ObjectList(Bucket) {
  * @param {String} Bucket S3 bucket to get contents from.
  * @param {Object} contents S3 bucket contents array.
  */
-export function getAllS3ObjectFiles(Bucket, contents) {
+function getAllS3ObjectFiles(Bucket, contents) {
   return Promise.all(
     contents
       .filter((content) => content.Key.slice(-1) !== '/')
@@ -61,7 +61,7 @@ export function getAllS3ObjectFiles(Bucket, contents) {
  * @param {String} Key S3 content object key
  * @return {Promise<Object>} S3 Content object filename (Key) and buffer (Body) 
  */
-export function getS3Object(Bucket, Key) {
+function getS3Object(Bucket, Key) {
   const params = {
     Bucket,
     Key
@@ -80,7 +80,7 @@ export function getS3Object(Bucket, Key) {
  * @param {Object} filedata S3 Content object filename (Key) and buffer (Body) 
  * @return {Promise}
  */
-export function writeAllToFile(directory, filedata) {
+function writeAllToFile(directory, filedata) {
   return Promise.all(filedata.map((data) => {
     const filepath = path.join(directory, data.filename);
     return writeToFile(data.data, filepath);
@@ -93,7 +93,7 @@ export function writeAllToFile(directory, filedata) {
  * @param {String} filepath 
  * @return {Promise}
  */
-export function writeToFile(buffer, filepath) {
+function writeToFile(buffer, filepath) {
   return new Promise((resolve, reject) => {
     fs.writeFile(filepath, buffer, (err) => {
       if (err) return reject(err);
